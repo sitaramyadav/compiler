@@ -10,7 +10,7 @@
 "-"                   return '-'
 "+"                   return '+'
 <<EOF>>               return 'EOF'
-.                     return 'INVALID'
+.                     return 'INVALID INPUT'
 
 /lex
 
