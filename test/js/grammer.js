@@ -6,10 +6,12 @@ let backus_naur_form = fs.readFileSync('/Users/sitaram/Project/compiler/src/js/g
 let parser = new jison.Parser(backus_naur_form);
 
 
+describe('parsing mathematical expressions', () => {
 
-describe('Mathematical expression', function() {
+    describe('name', () => {
 
-        it('It should return each expression in bracket', function() {
+    })
+    it('It should return each expression in bracket', () =>  {
 
             let expectedResult = parser.parse('1+2+3+4');
             let result = '(((1+2)+3)+4)';
@@ -17,7 +19,7 @@ describe('Mathematical expression', function() {
             assert.equal(expectedResult,result);
         });
 
-    it('It throw error if does not match mathematical expression', function() {
+    it('It throw error if does not match mathematical expression', () =>  {
 
         assert.throws(parser.parse,Error,'Invalid Input');
 
