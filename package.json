@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/sitaramyadav/compiler#readme",
   "devDependencies": {
+    "jison": "^0.4.17",
     "mocha": "^3.1.2"
   }
 }
