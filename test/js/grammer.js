@@ -1,7 +1,9 @@
+'use strict'
+
 let assert = require('assert');
 let fs = require('fs');
 let jison = require('jison');
-let backus_naur_form = fs.readFileSync('/Users/sitaram/Project/compiler/src/js/grammer.jison', 'utf8');
+let backus_naur_form = fs.readFileSync('./src/js/grammer.jison', 'utf8');
 
 let parser = new jison.Parser(backus_naur_form);
 
