@@ -1,29 +1,47 @@
 'use strict'
 
-let assert = require('assert');
-let fs = require('fs');
-let jison = require('jison');
-let backus_naur_form = fs.readFileSync('./src/js/assignment_grammer.jison', 'utf8');
+var assert = require('assert');
+var chai = require('chai');
+var fs = require('fs');
+var jison = require('jison');
+var backus_naur_form = fs.readFileSync('/Users/sitaram/Project/compiler/src/js/assignment/assignment_grammer.jison', 'utf8');
 
-let parser = new jison.Parser(backus_naur_form);
+var parser = new jison.Parser(backus_naur_form);
+var tree_parser = require('/Users/sitaram/Project/compiler/src/js/assignment/tree_parser.js');
 
 
 describe('parsing mathematical expressions', () => {
 
-    describe('name', () => {
+    describe('grouping mathematical expression', () => {
 
-    })
-    it('It should return each expression in bracket', () =>  {
+        it('should return /(1+2/ for the input 1+2', () =>{
 
-        let expectedResult = parser.parse('1+2+3+4');
-        let result = '(((1+2)+3)+4)';
+             let tree = parser.parse('1+2');
+             let expected =  tree.parenthesis(tree.leftChild,tree.rightChild);     // should not be orgument passed because allready state is there
+             let result =   '(1+2)';
+             chai.expect(expected).to.equal(result);
+        });
 
-        assert.equal(expectedResult,result);
+        it('should return /((1+2)+3) for the input 1+2+3/', () => {
+            let tree = parser.parse('1+2+3');
+            console.log('this is tree:==>',tree);
+            let expected = tree.parenthesis(tree.leftChild, tree.rightChild);
+            console.log(tree,'what is tree==',expected);
+            chai.expect(expected).to.equal('((1+2)+3)');
+        });
+
+        it('should return /(((1+2)+3)+4)/ for the input /1+2+3+4/', () => {
+
+            var tree = parser.parse('1+2+3+4');
+            chai.expect(tree.parenthesis(tree.leftChild,tree.rightChild)).to.equal('(((1+2)+3)+4)');
+
+        });
+
+        it('It throw error if does not match mathematical expression', () => {
+            assert.throws(parser.parse, Error, 'Invalid Input');
+
+        });
     });
 
-    it('It throw error if does not match mathematical expression', () =>  {
 
-        assert.throws(parser.parse,Error,'Invalid Input');
-
-    });
 });

@@ -1,0 +1,120 @@
+
+<--------------------------------------------------- Assignment 1 <------------------------------------------------------------------>
+
+   Using the calculator.jison example,
+    write appropriate code/configuration to express any given mathematical expression with appropriate parenthesis.
+
+   For ex:
+
+        1+2+3+4
+        (((1+2)+3)+4)
+
+    In order to get it working, you will have to build a parse tree.
+    In order to build the parse tree, you will have to understand $$.
+
+    Approach the problem by considering only basic + operations at first and ignore negative numbers.
+     Build the grammar one production at a time.
+
+
+
+   <---------------------------------------------------> Assignment 2 <------------------------------------------------------------------>
+
+    Extend the parentheses example to output a numeric expression in words as follows:
+
+       2+3*4
+       (two + (three times four))
+
+    You should be able to handle numbers in the billions. So:
+
+    1000000000+2 should output:
+    (one billion plus two)
+
+    The rule of parentheses remains from the previous assignment.
+     In order to attempt this assignment, it will help to look at classy_ast.jison.
+
+
+   <---------------------------------------------------> Assignment 3 <------------------------------------------------------------------>
+
+
+   Our mathematical expression evaluator will now grow to support multiple statements and will support basic variable substitution.
+
+   x=10;
+   5+x*2;
+
+   This above program returns 25 after evaluating the expression by substituting x's value.
+   To start with, make the program work for a single variable and a single expression.
+   Eventually, you should be able to handle the following:
+
+   x=10;
+   y=20;
+   z=30;
+   (x^2)+(y^2)-(z^2);
+
+   You may refer to ansic.jison which provides the grammar and lexer specification for Ansi C.
+   This should give you some ideas about how to write your grammar which is quite straightforward.
+
+   Note, that after writing your grammar, it is possible that your grammar recognises:
+
+   x^2;
+   x=10;
+
+   where the variable assignment comes after the expression. This should be considered illegal.
+    Provide an appropriate error message.
+
+
+   <---------------------------------------------------> Assignment 4 <------------------------------------------------------------------>
+
+
+   Our mathematical expression evaluator will now have the ability to handle complex assignments:
+
+   x=10;
+   y=x+20;
+   y+5;
+
+   should result in 35.
+
+   The complex assignment should allow for any possible mathematical expression that the language allows,
+   including factorial and exponents.
+   You should also be able to reassign a value to the same variable as follows:
+
+   x=2;
+   x=2^5;
+   x;
+
+   should result in 32.
+
+   It is possible that many of you wrote the grammar well enough that you have very minimal changes to make to get this assignment working. Fear not. Assignment 5 shall arrive shortly.
+
+<---------------------------------------------------> Assignment 5 <------------------------------------------------------------------>
+   Our mathematical expression evaluator will now generate equivalent Javascript code.
+    The output of our evaluator will no longer be a number, but a .js file which when executed should provide the answer of the expression.
+
+   We will make the assumption that any statement that is not an assignment will be logged to the console.
+
+   x=10;
+   5+x*2;
+
+   will generate:
+
+   var x=10;
+   console.log(5+(x*2));
+
+
+
+   If there is more than one expression,
+   all of them will be logged to console as follows:
+
+   x=10;
+   5+x*2;
+   6*x;
+
+   var x=10;
+   console.log(5+(x*2));
+   console.log(6*x);
+
+   For this assignment, assume that an assignment to a variable happens only once.
+    You don't have to consider any case where a value is reassigned to itself or changes halfway through:
+
+   x=5;
+   x=6;
+   x+5;
