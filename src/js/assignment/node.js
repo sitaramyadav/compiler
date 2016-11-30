@@ -7,11 +7,17 @@ class OperatorNode {
        return eval(`${first_num}${this.node}${second_num}`);
    }
 
-
-   toWords () {
-       var operators = {'+':'plus','*':'times'}
+   toString (first_str,second_str){
+        return first_str + this.toOperator(this.node) + second_str;
+    }
+   toOperator () {
+       var operators = {'+':'+','*':'*'}
        return operators[this.node];
    }
+   toWords () {
+        var operators = {'+':'plus','*':'times'};
+       return operators[this.node];
+   };
 }
 
 module.exports = OperatorNode;

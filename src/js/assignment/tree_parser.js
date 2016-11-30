@@ -13,11 +13,11 @@ class TreeParser {
         if(this.rightChild instanceof TreeParser){
             this.rightChild = this.leftChild.parenthesis();
         }
-        return this.addParenthesis();
+        return this.concat();
     }
 
-    addParenthesis() { // operater has to be passed as parameter
-        return'(' + this.leftChild + '+' + this.rightChild + ')';
+    concat() {
+        return'(' + this.parentNode.toString(this.leftChild,this.rightChild)+ ')';
     }
 
     toWords (){
