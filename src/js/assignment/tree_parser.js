@@ -1,27 +1,27 @@
 var number_to_words = require('number-to-words');
 
 class TreeParser {
-    constructor(leftChild,parentNode, rightChild) {
-        this.leftChild = leftChild;
-        this.parentNode = parentNode;
-        this.rightChild = rightChild;
+    constructor(left_child,parent_node, right_child) {
+        this.left_child = left_child;
+        this.parent_node = parent_node;
+        this.right_child = right_child;
     }
     parenthesis () {
-        if(this.leftChild instanceof TreeParser){
-            this.leftChild = this.leftChild.parenthesis();
+        if(this.left_child instanceof TreeParser){
+            this.left_child = this.left_child.parenthesis();
         }
-        if(this.rightChild instanceof TreeParser){
-            this.rightChild = this.leftChild.parenthesis();
+        if(this.right_child instanceof TreeParser){
+            this.right_child = this.left_child.parenthesis();
         }
         return this.concat();
     }
 
     concat() {
-        return'(' + this.parentNode.toString(this.leftChild,this.rightChild)+ ')';
+        return'(' + this.parent_node.toString(this.left_child,this.right_child)+ ')';
     }
 
     toWords (){
-        return number_to_words.toWords(this.leftChild);
+        return number_to_words.toWords(this.left_child);
     }
 
 }
