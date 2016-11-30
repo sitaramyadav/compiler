@@ -11,6 +11,8 @@ var filepath = require('filepath');
 var path = filepath.create('./src/js/assignment/tree_parser.js');
 var TreeParser = require(path+'');
 
+var operator_node_path = filepath.create('./src/js/assignment/node.js');
+var OperatorNode = require(operator_node_path+'');
 
 %}
 
@@ -45,7 +47,7 @@ expressions
 e
     : e '+' e
     {
-
+        $2 = new OperatorNode($2);
 		$$ = new TreeParser($1,$2,$3);
     }
 

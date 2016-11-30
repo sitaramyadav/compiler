@@ -14,26 +14,23 @@ describe('parsing mathematical expressions', () => {
 
     describe('grouping mathematical expression', () => {
 
-        it('should return /(1+2/ for the input 1+2', () =>{
-
+        it('should return (1+2 for the input 1+2', () =>{
              let tree = parser.parse('1+2');
-             let expected =  tree.parenthesis(tree.leftChild,tree.rightChild);     // should not be orgument passed because allready state is there
-             let result =   '(1+2)';
+             let expected =  tree.parenthesis();
+             let result =  '(1+2)';
              chai.expect(expected).to.equal(result);
         });
 
-        it('should return /((1+2)+3) for the input 1+2+3/', () => {
+        it('should return ((1+2)+3) for the input 1+2+3/', () => {
             let tree = parser.parse('1+2+3');
-            console.log('this is tree:==>',tree);
-            let expected = tree.parenthesis(tree.leftChild, tree.rightChild);
-            console.log(tree,'what is tree==',expected);
+            let expected = tree.parenthesis();
             chai.expect(expected).to.equal('((1+2)+3)');
         });
 
-        it('should return /(((1+2)+3)+4)/ for the input /1+2+3+4/', () => {
+        it('should return (((1+2)+3)+4) for the input 1+2+3+4', () => {
 
             var tree = parser.parse('1+2+3+4');
-            chai.expect(tree.parenthesis(tree.leftChild,tree.rightChild)).to.equal('(((1+2)+3)+4)');
+            chai.expect(tree.parenthesis()).to.equal('(((1+2)+3)+4)');
 
         });
 

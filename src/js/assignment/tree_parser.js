@@ -6,24 +6,22 @@ class TreeParser {
         this.parentNode = parentNode;
         this.rightChild = rightChild;
     }
-    parenthesis (leftChild,rightChild) {
-        let self = this;
-        var  str = '';
-        if(leftChild instanceof TreeParser){
-            leftChild = leftChild.parenthesis(leftChild.leftChild,leftChild.rightChild);
+    parenthesis () {
+        if(this.leftChild instanceof TreeParser){
+            this.leftChild = this.leftChild.parenthesis();
         }
-        if(rightChild instanceof TreeParser){
-            rightChild = leftChild.parenthesis(rightChild.leftChild, rightChild.rightChild);
+        if(this.rightChild instanceof TreeParser){
+            this.rightChild = this.leftChild.parenthesis();
         }
-        return this.addParenthesis(leftChild, rightChild);
+        return this.addParenthesis();
     }
 
-    addParenthesis(leftChild, rightChild) { // operater has to be passed as parameter
-        return'(' + leftChild + '+' + rightChild + ')';
+    addParenthesis() { // operater has to be passed as parameter
+        return'(' + this.leftChild + '+' + this.rightChild + ')';
     }
 
     toWords (){
-        return number_to_words.toWords(tree.leftChild);
+        return number_to_words.toWords(this.leftChild);
     }
 
 }
